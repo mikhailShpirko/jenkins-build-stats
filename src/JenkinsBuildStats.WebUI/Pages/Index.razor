@@ -1,0 +1,117 @@
+﻿@page "/"
+@inject BuildStatsApiClient _apiClient
+
+<PageTitle>Last Successful Build Stats</PageTitle>
+
+<h1>Last Successful Build Stats</h1>
+
+@if (!_dataLoaded)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @foreach (var message in _messages)
+    {
+        <p><b>@message</b></p>
+    }
+    <div class="row">
+        <button class="btn btn-success" @onclick="GenerateBuildStats">Re-generate</button>
+    </div>
+    if(_stats != null)
+    {
+        <div class="row">
+            @foreach (var projectStats in _stats.BuildStats)
+            {
+                <div class="col col-4">
+                    <div class="row">
+                        <b>@projectStats.Project.Name <small>@projectStats.Duration (@projectStats.StartedAt - @projectStats.EndedAt)</small></b>
+                    </div>
+                    <div class="row">
+                        <ul class="list-unstyled">
+                            @foreach (var sectionStats in projectStats.SectionsStats)
+                            {
+                                <li>@sectionStats.Section.Name <small>@sectionStats.Duration (@sectionStats.StartedAt - @sectionStats.EndedAt)</small></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+
+@code {
+    private LastSuccessfulBuildStatsDTO _stats;
+    private bool _dataLoaded = false;
+    private IList<string> _messages = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetBuildStats();
+    }
+
+    private async Task GetBuildStats(){
+        ClearViewData();
+
+        var response = await _apiClient.GetAsync();
+        response
+           .Switch(
+               (stats) =>
+               {
+                   _stats = stats;
+               },
+               (notFound) =>
+               {
+                   _messages.Add(notFound.Message);
+               },
+               (internalServerError) =>
+               {
+                   _messages.Add(internalServerError.Message);
+               },
+               (unexpected) =>
+               {
+                   _messages.Add(unexpected.Message);
+               }
+           );
+        _dataLoaded = true;
+        StateHasChanged();
+    }
+
+    private async Task GenerateBuildStats()
+    {
+        ClearViewData();
+        var response = await _apiClient.GenerateAsync();
+        _dataLoaded = true;
+        response.Switch(
+            async (ok) => {
+                await GetBuildStats();
+             },
+            (notFound) =>
+            {
+                _messages.Add(notFound.Message);
+            },
+            (badRequest) =>
+            {
+                foreach (var message in badRequest.ErrorMessages)
+                {
+                    _messages.Add(message);
+                }
+            },
+            (serverError) =>
+            {
+                _messages.Add(serverError.Message);
+            },
+            (unexpected) =>
+            {
+                _messages.Add(unexpected.Message);
+            }
+        );
+    }
+
+    private void ClearViewData(){
+        _dataLoaded = false;
+        _messages.Clear();
+        _stats = null;
+    }
+}

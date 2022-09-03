@@ -1,0 +1,186 @@
+﻿@page "/settings"
+@inject SettingsApiClient _apiClient
+
+<PageTitle>Settings</PageTitle>
+
+<h1>Settings</h1>
+
+@if (!_dataLoaded)
+{
+    <p><em>Loading...</em></p>
+}
+else {
+
+    @foreach (var message in _messages)
+    {
+        <p><b>@message</b></p>
+    }
+
+    <EditForm Model="@_settings" >
+        <div class="mb-3 row">
+            <div class="mb-3 row">
+                <b>Jenkins API Client Settings</b>
+            </div>
+            <div class="mb-3">
+                <label for="JenkinsClientConfig_BaseUrl" class="form-label">Base URL</label>
+                <InputText id="JenkinsClientConfig_BaseUrl" @bind-Value="_settings.JenkinsClientConfig.BaseUrl" class="form-control" placeholder="Base URL" />          
+            </div>
+            <div class="mb-3">
+                <label for="JenkinsClientConfig_UserName" class="form-label">UserName</label>
+                <InputText id="JenkinsClientConfig_UserName" @bind-Value="_settings.JenkinsClientConfig.UserName" class="form-control" placeholder="Base URL" />
+            </div>
+            <div class="mb-3">
+                <label for="JenkinsClientConfig_ApiToken" class="form-label">API Token</label>
+                <InputText id="JenkinsClientConfig_ApiToken" @bind-Value="_settings.JenkinsClientConfig.ApiToken" class="form-control" placeholder="Base URL" />
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="mb-3 row">
+                <b>Sections</b>
+            </div>
+            @for (var i = 0; i < _settings.SectionConfigs.Count; i++)
+            {
+                var nameId = $"SectionConfigs_{i}_Section_Name";
+                var startsWithId = $"SectionConfigs_{i}_StartsWith";
+                var endsWithId = $"SectionConfigs_{i}_EndsWith";
+                var index = i; // for binding
+                <div class="mb-3 row align-items-end">
+                    <div class="col-auto">
+                        <label for="@nameId" class="form-label">Name</label>
+                        <InputText id="@nameId" @bind-Value="_settings.SectionConfigs[index].Section.Name" class="form-control" placeholder="Name" />
+                    </div>
+                    <div class="col-auto">
+                        <label for="@startsWithId" class="form-label">Starts With</label>
+                        <InputText id="@startsWithId" @bind-Value="_settings.SectionConfigs[index].StartsWith" class="form-control" placeholder="Starts With" />
+                    </div>
+                    <div class="col-auto">
+                        <label for="@endsWithId" class="form-label">Ends With</label>
+                        <InputText id="@endsWithId" @bind-Value="_settings.SectionConfigs[index].EndsWith" class="form-control" placeholder="Ends With" />
+                    </div>
+                    <div class="col-auto">
+                        <button @onclick="@(e => RemoveSectionConfig(index))" class="btn btn-danger">Remove</button>
+                    </div>
+                </div>
+            }
+            <div class="mb-3 row">
+                <div class="col-auto">
+                    <button @onclick="AddSectionConfig" class="btn btn-success">Add Section</button>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="mb-3 row">
+                <b>Projects</b>
+            </div>
+            @for (var i = 0; i < _settings.Projects.Count; i++)
+            {
+                var id = $"Projects_{i}_Name";
+                var index = i; // for binding
+                <div class="mb-3 row align-items-end">
+                    <div class="col-auto">
+                        <label for="@id" class="form-label">Name</label>
+                        <InputText id="@id" @bind-Value="_settings.Projects[index].Name" class="form-control" placeholder="Name" />
+                    </div>                   
+                    <div class="col-auto">
+                        <button @onclick="@(e => RemoveProject(index))" class="btn btn-danger">Remove</button>
+                    </div>
+                </div>
+            }
+            <div class="mb-3 row">
+                <div class="col-auto">
+                    <button @onclick="AddProject" class="btn btn-success">Add Project</button>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+}
+
+<button class="btn btn-primary" @onclick="SaveAsync">Save</button>
+
+@code {
+    private SettingsDTO _settings = new SettingsDTO {
+        Projects = new List<ProjectDTO>(),
+        JenkinsClientConfig = new JenkinsClientConfigDTO(),
+        SectionConfigs = new List<SectionConfigDTO>()
+    };
+    private IList<string> _messages = new List<string>();
+    private bool _dataLoaded = false;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _apiClient.GetAsync();
+
+        response
+            .Switch(
+                (settings) => {
+                    _settings = settings;
+                },
+                (notFound) => {
+                    _messages.Add(notFound.Message);
+                },
+                (internalServerError) =>
+                {
+                    _messages.Add(internalServerError.Message);
+                },
+                (unexpected) =>
+                {
+                    _messages.Add(unexpected.Message);
+                }
+            );
+        _dataLoaded = true;
+    }
+
+    private void AddSectionConfig()
+    {
+        _settings.SectionConfigs.Add(new SectionConfigDTO
+            {
+                Section = new SectionDTO()
+            });
+    }
+
+    private void RemoveSectionConfig(int index)
+    {
+        _settings.SectionConfigs.RemoveAt(index);
+    }
+
+    private void AddProject()
+    {
+        _settings.Projects.Add(new ProjectDTO());
+    }
+
+    private void RemoveProject(int index)
+    {
+        _settings.Projects.RemoveAt(index);
+    }
+
+    private async Task SaveAsync()
+    {
+        var response = await _apiClient.SaveAsync(_settings);
+        _messages.Clear();
+        response
+        .Switch(
+            (ok) =>
+            {
+                _messages.Add(ok.Message);
+            },
+            (notFound) =>
+            {
+                _messages.Add(notFound.Message);
+            },
+            (badRequest) => {
+                foreach (var message in badRequest.ErrorMessages)
+                {
+                    _messages.Add(message);
+                }
+            },
+            (serverError) =>
+            {
+                _messages.Add(serverError.Message);
+            },
+            (unexpected) => {
+                _messages.Add(unexpected.Message);
+            }
+        );
+    }
+}

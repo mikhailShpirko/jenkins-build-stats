@@ -1,0 +1,31 @@
+version: '3'
+services:
+  api:
+    image: jenkins_build_stats_api:v1
+    build:
+      context: ../
+      dockerfile: docker/JenkinsBuildStats.API.Dockerfile
+    container_name: jenkins_build_stats_api
+    volumes:
+      - jenkins_build_stats_volume:/usr/share/api/data
+    ports: 
+      - '9898:80'
+    environment:
+      "StorageFolderPath": "/usr/share/api/data"
+
+  web_ui:
+    image: jenkins_build_stats_web_ui:v1
+    build:
+      context: ../
+      dockerfile: docker/JenkinsBuildStats.WebUI.Dockerfile
+      args:
+        CONFIG_FILE_PATH: 'deploy/web_ui/appsettings.json'
+    container_name: jenkins_build_stats_web_ui  
+    depends_on:
+      - api
+    ports: 
+      - '9889:80'
+
+volumes:
+  jenkins_build_stats_volume:
+      driver: local
