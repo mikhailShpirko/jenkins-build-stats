@@ -1,12 +1,4 @@
-using FluentValidation;
-using JenkinsBuildStats.Domain.Contract;
-using JenkinsBuildStats.Domain.Processing;
-using JenkinsBuildStats.Infrastructure.ApiClients;
-using JenkinsBuildStats.Infrastructure.DataStorage;
-using JenkinsBuildStats.Infrastructure.Repos;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,15 +18,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
-
-builder.Services.AddScoped<StorageDirectory>(x => new StorageDirectory(builder.Configuration["StorageFolderPath"]));
-builder.Services.AddScoped<IFileStorage, JsonFileStorage>();
-builder.Services.AddScoped<ISettingsRepo, SettingsFileRepo>();
-builder.Services.AddScoped<ILastSuccessfulBuildStatsRepo, LastSuccessfulBuildStatsRepoFileRepo>();
-builder.Services.AddScoped<IJenkinsApiClientBuilder, JenkinsApiClientBuilder>();
-builder.Services.AddScoped<ILatestBuildStatsGeneratorBuilder, LatestBuildStatsGeneratorBuilder>();
-builder.Services.AddValidatorsFromAssembly(Assembly.Load("JenkinsBuildStats.Domain"));
-builder.Services.AddMediatR(Assembly.Load("JenkinsBuildStats.Domain"));
+JenkinsBuildStats.Infrastructure.ServicesConfiguration.Configure(builder.Services, builder.Configuration);
+JenkinsBuildStats.Application.ServicesConfiguration.Configure(builder.Services);
 builder.Services.AddAutoMapper(typeof(Program));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

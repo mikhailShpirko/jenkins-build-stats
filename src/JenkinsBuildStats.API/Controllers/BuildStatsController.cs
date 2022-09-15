@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using JenkinsBuildStats.API.DTO;
-using JenkinsBuildStats.Domain.Requests;
+using JenkinsBuildStats.Application.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -23,7 +23,7 @@ namespace JenkinsBuildStats.API.Controllers
 
         [HttpGet]
         [SwaggerOperation(Summary = "Get Build Stats", Description = "Get stats of latest build for all projects")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SettingsDTO))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LastSuccessfulBuildStatsDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NotFoundDTO))]
         public async Task<IActionResult> GetLatestBuildStatsAsync(CancellationToken cancellationToken)
         {
@@ -33,7 +33,8 @@ namespace JenkinsBuildStats.API.Controllers
             return getBuildStatsResponse
                 .Match((buildStats) =>
                 {
-                    return Ok(buildStats);
+                    var dto = _mapper.Map<LastSuccessfulBuildStatsDTO>(buildStats);
+                    return Ok(dto);
                 },
                 (noBuildStats) =>
                 {

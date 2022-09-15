@@ -1,4 +1,4 @@
-﻿using JenkinsBuildStats.Domain.Contract;
+﻿using JenkinsBuildStats.Application.Contract;
 using JenkinsBuildStats.Domain.Entities;
 using JenkinsBuildStats.Infrastructure.DataStorage;
 

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using JenkinsBuildStats.API.DTO;
+using JenkinsBuildStats.Application.Requests;
 using JenkinsBuildStats.Domain.Entities;
-using JenkinsBuildStats.Domain.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
