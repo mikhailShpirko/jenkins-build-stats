@@ -38,7 +38,7 @@ docker compose -f deploy/JenkinsBuildStats.DockerCompose.yaml -p jenkins_build_s
     ├── deploy                                              # deployment scripts and configuration files
     ├── docker                                              # docker files for project components
     ├── src                                                 # source code for apps
-    └── tests                                               # unit tests       
+    └── tests                                               # unit and integration tests       
     
 
 ## Limitations
