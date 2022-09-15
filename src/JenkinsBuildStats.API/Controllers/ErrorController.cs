@@ -6,7 +6,7 @@ namespace JenkinsBuildStats.API.Controllers
 {
     [ApiController]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class ErrorController : ControllerBase
+    public sealed class ErrorController : ControllerBase
     {
         private readonly ILogger<ErrorController> _logger;
 

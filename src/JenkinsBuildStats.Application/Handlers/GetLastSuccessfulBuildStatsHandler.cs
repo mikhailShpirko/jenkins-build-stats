@@ -6,7 +6,7 @@ using MediatR;
 
 namespace JenkinsBuildStats.Application.Handlers
 {
-    public class GetLastSuccessfulBuildStatsHandler : IRequestHandler<GetLastSuccessfulBuildStatsRequest, GetLastSuccessfulBuildStatsResponse>
+    public sealed class GetLastSuccessfulBuildStatsHandler : IRequestHandler<GetLastSuccessfulBuildStatsRequest, GetLastSuccessfulBuildStatsResponse>
     {
         private readonly ILastSuccessfulBuildStatsRepo _repo;
         public GetLastSuccessfulBuildStatsHandler(ILastSuccessfulBuildStatsRepo repo)

@@ -1,9 +1,9 @@
-﻿namespace JenkinsBuildStats.Domain.Entities
+﻿namespace JenkinsBuildStats.Application.Processing
 {
-    public class BuildOutputLog
+    public sealed record BuildOutputLog
     {        
-        public readonly TimeSpan TimeSpan;
-        public readonly string LogText;
+        public TimeSpan TimeSpan { get; }
+        public string LogText { get; }
 
         public BuildOutputLog(TimeSpan timeSpan,
             string logText)

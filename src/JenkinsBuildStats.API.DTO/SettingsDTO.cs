@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.API.DTO
 {
-    public class SettingsDTO
+    public sealed class SettingsDTO
     {
         public JenkinsClientConfigDTO JenkinsClientConfig { get; set; }
 

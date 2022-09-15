@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.API.DTO
 {
-    public class SectionStatsDTO
+    public sealed class SectionStatsDTO
     {
         public SectionDTO Section { get; set; }
         public TimeSpan StartedAt { get; set; }

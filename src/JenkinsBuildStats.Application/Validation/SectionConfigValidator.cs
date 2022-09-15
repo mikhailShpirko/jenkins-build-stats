@@ -3,7 +3,7 @@ using JenkinsBuildStats.Domain.Entities;
 
 namespace JenkinsBuildStats.Application.Validation
 {
-    public class SectionConfigValidator : AbstractValidator<SectionConfig>
+    public sealed class SectionConfigValidator : AbstractValidator<SectionConfig>
     {
         public SectionConfigValidator()
         {

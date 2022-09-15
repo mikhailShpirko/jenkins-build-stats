@@ -7,7 +7,7 @@ using MediatR;
 
 namespace JenkinsBuildStats.Application.Handlers
 {
-    public class SaveSettingsHandler : IRequestHandler<SaveSettingsRequest, SaveSettingsResponse>
+    public sealed class SaveSettingsHandler : IRequestHandler<SaveSettingsRequest, SaveSettingsResponse>
     {
         private readonly ISettingsRepo _repo;
         private readonly IValidator<Settings> _validator;

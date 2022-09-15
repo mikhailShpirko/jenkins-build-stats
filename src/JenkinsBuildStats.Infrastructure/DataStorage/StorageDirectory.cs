@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.Infrastructure.DataStorage
 {
-    public class StorageDirectory
+    public sealed record StorageDirectory
     {
         public string Path { get; }
 

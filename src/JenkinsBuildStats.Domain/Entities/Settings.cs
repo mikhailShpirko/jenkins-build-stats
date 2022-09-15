@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.Domain.Entities
 {
-    public class Settings
+    public sealed class Settings
     {     
         public JenkinsClientConfig JenkinsClientConfig { get; init; }
 

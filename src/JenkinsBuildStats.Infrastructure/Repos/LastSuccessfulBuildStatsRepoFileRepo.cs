@@ -4,7 +4,7 @@ using JenkinsBuildStats.Infrastructure.DataStorage;
 
 namespace JenkinsBuildStats.Infrastructure.Repos
 {
-    public class LastSuccessfulBuildStatsRepoFileRepo : 
+    public sealed class LastSuccessfulBuildStatsRepoFileRepo : 
         BaseFileRepo<LastSuccessfulBuildStats>,
         ILastSuccessfulBuildStatsRepo
     {

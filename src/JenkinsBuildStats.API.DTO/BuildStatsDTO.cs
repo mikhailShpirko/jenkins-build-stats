@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.API.DTO
 {
-    public class BuildStatsDTO
+    public sealed class BuildStatsDTO
     {
         public ProjectDTO Project { get; set; }
         public IReadOnlyCollection<SectionStatsDTO> SectionsStats { get; set; }

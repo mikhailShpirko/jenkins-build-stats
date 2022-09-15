@@ -8,7 +8,7 @@ using System.Collections.Concurrent;
 
 namespace JenkinsBuildStats.Application.Handlers
 {
-    public class GenerateLastSuccessfulBuildStatsHandler : IRequestHandler<GenerateLastSuccessfulBuildStatsRequest, GenerateLastSuccessfulBuildStatsResponse>
+    public sealed class GenerateLastSuccessfulBuildStatsHandler : IRequestHandler<GenerateLastSuccessfulBuildStatsRequest, GenerateLastSuccessfulBuildStatsResponse>
     {
         private readonly ISettingsRepo _settingsRepo;
         private readonly ILatestBuildStatsGeneratorBuilder _latestBuildStatsGeneratorBuilder;

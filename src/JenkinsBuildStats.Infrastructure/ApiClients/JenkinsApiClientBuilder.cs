@@ -3,7 +3,7 @@ using JenkinsBuildStats.Domain.Entities;
 
 namespace JenkinsBuildStats.Infrastructure.ApiClients
 {
-    public class JenkinsApiClientBuilder : IJenkinsApiClientBuilder
+    public sealed class JenkinsApiClientBuilder : IJenkinsApiClientBuilder
     {
         public IJenkinsApiClient Build(JenkinsClientConfig jenkinsClientConfig)
         {

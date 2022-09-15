@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.Domain.Entities
 {
-    public class SectionConfig
+    public sealed class SectionConfig
     {
         public Section Section { get; init; }
         public string StartsWith { get; init; }

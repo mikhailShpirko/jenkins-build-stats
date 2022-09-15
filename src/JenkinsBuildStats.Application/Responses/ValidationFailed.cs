@@ -2,9 +2,9 @@
 
 namespace JenkinsBuildStats.Application.Responses
 {
-    public class ValidationFailed<T>
+    public sealed record ValidationFailed<T>
     {
-        public readonly IReadOnlyCollection<ValidationFailure> Errors;
+        public IReadOnlyCollection<ValidationFailure> Errors { get; }
 
         public ValidationFailed(List<ValidationFailure> errors)
         {

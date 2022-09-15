@@ -3,7 +3,7 @@ using MediatR;
 
 namespace JenkinsBuildStats.Application.Requests
 {
-    public class GenerateLastSuccessfulBuildStatsRequest : IRequest<GenerateLastSuccessfulBuildStatsResponse>
+    public sealed class GenerateLastSuccessfulBuildStatsRequest : IRequest<GenerateLastSuccessfulBuildStatsResponse>
     {
     }
 }

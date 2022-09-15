@@ -1,11 +1,12 @@
 ﻿using JenkinsBuildStats.Application.Contract;
+using JenkinsBuildStats.Application.Processing;
 using JenkinsBuildStats.Domain.Entities;
 using JenkinsBuildStats.Infrastructure.Exceptions;
 using System.Text;
 
 namespace JenkinsBuildStats.Infrastructure.ApiClients
 {
-    public class JenkinsApiClient : IJenkinsApiClient
+    public sealed class JenkinsApiClient : IJenkinsApiClient
     {
         private readonly JenkinsClientConfig _jenkinsClientConfig;
         private readonly HttpMessageHandler _httpMessageHandler;

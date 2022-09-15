@@ -1,8 +1,8 @@
 ﻿namespace JenkinsBuildStats.Application.Responses
 {
-    public class ErrorDuringProcessing
+    public sealed record ErrorDuringProcessing
     {
-        public readonly Exception Exception;
+        public Exception Exception { get; }
         public ErrorDuringProcessing(Exception exception)
         {
             Exception = exception;

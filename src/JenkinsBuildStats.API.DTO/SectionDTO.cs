@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.API.DTO
 {
-    public class SectionDTO
+    public sealed class SectionDTO
     {
         public string Name { get; set; }
     }

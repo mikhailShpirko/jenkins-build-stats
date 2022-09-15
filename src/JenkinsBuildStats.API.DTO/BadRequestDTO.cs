@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.API.DTO
 {
-    public class BadRequestDTO
+    public sealed class BadRequestDTO
     {
         public IEnumerable<string> ErrorMessages { get; init; }
     }

@@ -4,7 +4,7 @@ using JenkinsBuildStats.Domain.Entities;
 
 namespace JenkinsBuildStats.API.Mapping
 {
-    public class BuildStatsProfile : Profile
+    internal sealed class BuildStatsProfile : Profile
     {
         public BuildStatsProfile()
         {

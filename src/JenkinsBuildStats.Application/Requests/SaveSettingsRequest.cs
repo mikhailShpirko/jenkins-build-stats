@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JenkinsBuildStats.Application.Requests
 {
-    public class SaveSettingsRequest : IRequest<SaveSettingsResponse>
+    public sealed class SaveSettingsRequest : IRequest<SaveSettingsResponse>
     {
         public readonly Settings Settings;
 

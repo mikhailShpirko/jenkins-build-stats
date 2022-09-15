@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.API.DTO
 {
-    public class InternalServerErrorDTO
+    public sealed class InternalServerErrorDTO
     {
         public string Message { get; }
 

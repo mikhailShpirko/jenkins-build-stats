@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.Application.Responses
 {
-    public class SuccessfullySaved<T>
+    public sealed record SuccessfullySaved<T>
     {
     }
 }

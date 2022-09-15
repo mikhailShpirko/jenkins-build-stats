@@ -6,7 +6,7 @@ using MediatR;
 
 namespace JenkinsBuildStats.Application.Handlers
 {
-    public class GetSettingsHandler : IRequestHandler<GetSettingsRequest, GetSettingsResponse>
+    public sealed class GetSettingsHandler : IRequestHandler<GetSettingsRequest, GetSettingsResponse>
     {
         private readonly ISettingsRepo _repo;
         public GetSettingsHandler(ISettingsRepo repo)

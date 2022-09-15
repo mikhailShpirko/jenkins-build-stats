@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.API.DTO
 {
-    public class NotFoundDTO
+    public sealed class NotFoundDTO
     {
         public string Message { get; }
         public NotFoundDTO(string message)

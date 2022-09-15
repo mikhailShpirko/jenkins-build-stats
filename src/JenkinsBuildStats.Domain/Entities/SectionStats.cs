@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.Domain.Entities
 {
-    public class SectionStats
+    public sealed class SectionStats
     {
         public Section Section { get; init; }
         public TimeSpan StartedAt { get; init; }

@@ -3,7 +3,7 @@ using JenkinsBuildStats.Domain.Entities;
 
 namespace JenkinsBuildStats.Application.Processing
 {
-    public class LatestBuildStatsGenerator : ILatestBuildStatsGenerator
+    internal sealed class LatestBuildStatsGenerator : ILatestBuildStatsGenerator
     {
         private readonly IJenkinsApiClient _jenkinsApiClient;
         private readonly IReadOnlyCollection<SectionConfig> _sectionConfigs;

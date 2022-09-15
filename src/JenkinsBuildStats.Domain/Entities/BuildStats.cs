@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.Domain.Entities
 {
-    public class BuildStats
+    public sealed class BuildStats
     {
         public Project Project { get; init; }
         public IReadOnlyCollection<SectionStats> SectionsStats { get; init; }

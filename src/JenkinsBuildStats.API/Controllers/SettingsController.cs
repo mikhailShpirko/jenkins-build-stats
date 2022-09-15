@@ -10,7 +10,7 @@ namespace JenkinsBuildStats.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SettingsController : BaseApiController
+    public sealed class SettingsController : BaseApiController
     {
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;

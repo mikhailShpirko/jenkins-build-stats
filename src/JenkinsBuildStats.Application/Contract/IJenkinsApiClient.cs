@@ -1,4 +1,4 @@
-﻿using JenkinsBuildStats.Domain.Entities;
+﻿using JenkinsBuildStats.Application.Processing;
 
 namespace JenkinsBuildStats.Application.Contract
 {

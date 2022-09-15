@@ -2,7 +2,7 @@
 
 namespace JenkinsBuildStats.Infrastructure.DataStorage
 {
-    public class JsonFileStorage : IFileStorage
+    public sealed class JsonFileStorage : IFileStorage
     {
         private readonly string _filesPath;
 

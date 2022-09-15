@@ -1,6 +1,6 @@
 ﻿namespace JenkinsBuildStats.Application.Responses
 {
-    public class EntityDoesNotExist<T>
+    public sealed record EntityDoesNotExist<T>
     {
     }
 }
