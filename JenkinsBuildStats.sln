@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsBuildStats.Applicati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsBuildStats.Application.Tests", "tests\JenkinsBuildStats.Application.Tests\JenkinsBuildStats.Application.Tests.csproj", "{99369D96-DB5F-4BA7-A7DE-8E60346C4510}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JenkinsBuildStats.Infrastructure.IntegrationTests", "tests\JenkinsBuildStats.Infrastructure.IntegrationTests\JenkinsBuildStats.Infrastructure.IntegrationTests.csproj", "{B7D0FFD4-A0FE-4D50-9AF0-479343AAE504}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{99369D96-DB5F-4BA7-A7DE-8E60346C4510}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99369D96-DB5F-4BA7-A7DE-8E60346C4510}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99369D96-DB5F-4BA7-A7DE-8E60346C4510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7D0FFD4-A0FE-4D50-9AF0-479343AAE504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D0FFD4-A0FE-4D50-9AF0-479343AAE504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D0FFD4-A0FE-4D50-9AF0-479343AAE504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D0FFD4-A0FE-4D50-9AF0-479343AAE504}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{ABFAAADA-CD11-41CB-9BA6-40FE321A03F9} = {D12491A8-C367-4188-BF91-D65C1519729E}
 		{212E5DE6-EB73-4A71-8456-E337AB778BB1} = {67997F27-DDC8-4A33-BE9F-0DBBF276AE25}
 		{99369D96-DB5F-4BA7-A7DE-8E60346C4510} = {D12491A8-C367-4188-BF91-D65C1519729E}
+		{B7D0FFD4-A0FE-4D50-9AF0-479343AAE504} = {D12491A8-C367-4188-BF91-D65C1519729E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A56DD58-7CD4-48EA-B163-45CE17214CAC}
