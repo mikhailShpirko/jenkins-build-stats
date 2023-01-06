@@ -42,7 +42,7 @@ docker compose -f deploy/JenkinsBuildStats.DockerCompose.yaml -p jenkins_build_s
     
 
 ## Limitations
-- Basic domain entities implementation. Didn't use aggregate root, value objects and domain events. The use-cases didn't require those, so they are not implmented in order not to voercomplicate solution with unused logic.
+- Basic domain entities implementation. Didn't use aggregate root, value objects and domain events. The use-cases didn't require those, so they are not implemented in order not to overcomplicate solution with unused logic.
 - Primitive data storage. Everything is stored in .json files.  Didn't want to invest time in saving data to any database engines and applying ORM. Current solution satisfies my needs.
 - Clunky front-end. Didn't want to invest time in any fancy UI/UX. Simple UI is enough for my needs.
 - Only Last Successful Build. The utility stores only results of the last successful build for all projects defined. May be in future I'll add support to store historical data and multiple builds.
